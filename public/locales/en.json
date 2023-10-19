@@ -1,0 +1,10 @@
+{
+    "screens": {
+        "login": {
+            "username": "Username",
+            "password": "Password",
+            "login": "Login",
+            "header": "Login"
+        }
+    }
+}

@@ -17,16 +17,15 @@ const App = () => {
 
    const DEV = import.meta.env.DEV;
 
-   // window.document.__defineGetter__("referrer", function () {
-   //    return "yoururl.com";
-   // });
-
    const checkLogin = async () => {
       try {
-         await AuthService.login("admin", "123456");
+         const res = await AuthService.login();
+         if (res.data === "Fails.") {
+            logOut();
+            return;
+         }
          logIn();
       } catch (error) {
-         console.log("🚀 ~ file: App.tsx:27 ~ checkLogin ~ error:", error);
          logOut();
       }
    };
@@ -35,21 +34,6 @@ const App = () => {
       axios.defaults.baseURL = DEV
          ? "http://localhost:8080/api/v2"
          : `${document.location.origin}/api/v2`;
-      if (DEV) {
-         // axios.defaults.headers.common.Origin = "http://localhost:8080";
-         // axios.defaults.headers.common.Referer = "http://localhost:8080";
-         // axios.defaults.headers.common.Host = "localhost:5173";
-         axios.interceptors.request.use((config) => {
-            console.log(
-               "🚀 ~ file: App.tsx:39 ~ axios.interceptors.request.use ~ config:",
-               config
-            );
-            config.headers.Origin = "http://localhost:8080";
-            // config.headers.Referer = "http://localhost:8080";
-            // config.headers.Host = "localhost:8080";
-            return config;
-         });
-      }
       checkLogin();
    }, []);
 
