@@ -41,6 +41,9 @@ dependencies:
   react-i18next:
     specifier: ^13.3.0
     version: 13.3.0(i18next@23.5.1)(react-dom@18.2.0)(react@18.2.0)
+  react-merge-refs:
+    specifier: ^2.1.1
+    version: 2.1.1
   react-router-dom:
     specifier: ^6.16.0
     version: 6.16.0(react-dom@18.2.0)(react@18.2.0)
@@ -3668,6 +3671,10 @@ packages:
       i18next: 23.5.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /react-merge-refs@2.1.1:
+    resolution: {integrity: sha512-jLQXJ/URln51zskhgppGJ2ub7b2WFKGq3cl3NYKtlHoTG+dN2q7EzWrn3hN3EgPsTMvpR9tpq5ijdp7YwFZkag==}
     dev: false
 
   /react-refresh@0.14.0:
