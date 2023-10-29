@@ -1,10 +1,17 @@
 {
-    "screens": {
-        "login": {
-            "username": "Username",
-            "password": "Password",
-            "login": "Login",
-            "header": "Login"
-        }
-    }
+   "screens": {
+      "login": {
+         "username": "Username",
+         "password": "Password",
+         "login": "Login",
+         "header": "Login"
+      }
+   },
+   "errors": {
+      "validation": {
+         "common": {
+            "fieldNotEmpty": "This field must not be empty"
+         }
+      }
+   }
 }

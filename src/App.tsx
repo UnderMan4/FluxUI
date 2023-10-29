@@ -19,7 +19,7 @@ const App = () => {
 
    const checkLogin = async () => {
       try {
-         const res = await AuthService.login();
+         const res = await AuthService.login({});
          if (res.data === "Fails.") {
             logOut();
             return;
