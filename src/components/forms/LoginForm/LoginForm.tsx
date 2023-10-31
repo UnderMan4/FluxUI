@@ -1,12 +1,14 @@
 import { Button } from "@/components/common";
 import { Form, TextInput } from "@/components/form";
 import { AuthService } from "@/services";
+import { useDataStore } from "@/stores/dataStore";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
 
 export const LoginForm: FC = () => {
    const { t } = useTranslation();
+   const { logIn } = useDataStore();
    return (
       <Form
          className="flex w-72 flex-col gap-4"
@@ -14,8 +16,11 @@ export const LoginForm: FC = () => {
             username: z.string().min(1, "common.fieldNotEmpty"),
             password: z.string().min(1, "common.fieldNotEmpty"),
          })}
-         onSubmit={(data) => {
-            console.table(AuthService.login(data));
+         onSubmit={async (data) => {
+            const res = await AuthService.login(data);
+            if (res.data === "Ok.") {
+               logIn();
+            }
          }}
          onSubmitError={(errors) => {
             console.log(errors);

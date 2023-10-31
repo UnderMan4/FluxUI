@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import Cookies from "js-cookie";
 
 export type DataStoreState = {
    isLoggedIn: boolean;
@@ -9,5 +10,8 @@ export type DataStoreState = {
 export const useDataStore = create<DataStoreState>((set) => ({
    isLoggedIn: false,
    logIn: () => set({ isLoggedIn: true }),
-   logOut: () => set({ isLoggedIn: false }),
+   logOut: () => {
+      set({ isLoggedIn: false });
+      Cookies.remove("SID");
+   },
 }));

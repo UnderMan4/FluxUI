@@ -1,10 +1,10 @@
 import { mergeRefs } from "@/utils/mergeRef";
-import { FC, useEffect, useRef } from "react";
+import { cls } from "@/utils/styles";
+import { FC, useRef } from "react";
 import { AriaTextFieldOptions, useTextField } from "react-aria";
 import { useFormContext } from "react-hook-form";
-import { ErrorText } from "./shared/ErrorText";
 import { useTranslation } from "react-i18next";
-import { cls } from "@/utils/styles";
+import { ErrorText } from "./shared/ErrorText";
 
 export type TextInputProps = Omit<
    AriaTextFieldOptions<"input">,
@@ -22,9 +22,6 @@ export const TextInput: FC<TextInputProps> = ({ className, ...props }) => {
 
    const error = formState.errors[name];
 
-   useEffect(() => {
-      console.log(formState.errors);
-   }, [formState.errors]);
    const inputRef = useRef<HTMLInputElement>(null);
    const { ref, ...registerProps } = register(name);
    const { inputProps, labelProps } = useTextField(props, inputRef);
