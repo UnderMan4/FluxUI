@@ -8,6 +8,9 @@ export type MainData = {
    tags?: string[];
    torrents?: DeepPartial<Torrents>;
    trackers?: DeepPartial<Trackers>;
+   torrents_removed?: string[];
+   categories_removed?: string[];
+   tags_removed?: string[];
 };
 
 export type Torrents = { [key: string]: Torrent };

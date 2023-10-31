@@ -1,9 +1,10 @@
 import { usePeriodicUpdate } from "@/hooks/usePeriodicUpdate";
 import { MainLayout } from "@/layouts/MainLayout";
-import { Login } from "@/router/login";
-import { Root } from "@/router/root";
+import { List, Login } from "@/router";
 import { AuthService } from "@/services";
 import { useDataStore } from "@/stores/dataStore";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import axios from "axios";
 import { useEffect } from "react";
 import {
@@ -16,6 +17,8 @@ const App = () => {
    const { logIn, logOut, isLoggedIn } = useDataStore();
 
    const DEV = import.meta.env.DEV;
+
+   const queryClient = new QueryClient();
 
    const checkLogin = async () => {
       try {
@@ -45,7 +48,7 @@ const App = () => {
          children: [
             {
                path: "/",
-               element: <Root />,
+               element: <List />,
             },
          ],
       },
@@ -55,7 +58,12 @@ const App = () => {
       },
    ]);
 
-   return <RouterProvider router={router} />;
+   return (
+      <QueryClientProvider client={queryClient}>
+         <RouterProvider router={router} />
+         <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+   );
 };
 
 export default App;

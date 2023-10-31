@@ -1,13 +1,15 @@
 import { SyncService } from "@/services";
 import { useDataStore } from "@/stores/dataStore";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export const usePeriodicUpdate = () => {
-   const { isLoggedIn } = useDataStore();
+   const { isLoggedIn, updateData } = useDataStore();
+   const rid = useRef<number>(0);
    const sendRequest = async () => {
       try {
-         const response = await SyncService.mainData();
-         console.log(response);
+         const { data } = await SyncService.mainData(rid.current);
+         if (data.rid) rid.current = data.rid;
+         updateData(data);
       } catch (error) {
          console.error(error);
       }
