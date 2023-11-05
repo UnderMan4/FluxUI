@@ -5,9 +5,15 @@ export type CardProps = {
    className?: string;
    children?: React.ReactNode | React.ReactNode[];
    label?: string;
+   containerClassName?: string;
 };
 
-export const Card: FC<CardProps> = ({ className, children, label }) => {
+export const Card: FC<CardProps> = ({
+   className,
+   children,
+   label,
+   containerClassName,
+}) => {
    return (
       <div
          className={cls(
@@ -16,11 +22,11 @@ export const Card: FC<CardProps> = ({ className, children, label }) => {
             {
                "pt-5": label,
             },
-            className
+            containerClassName
          )}
       >
          {label && <h2 className="text-2xl font-bold">{label}</h2>}
-         <div className="">{children}</div>
+         <div className={className}>{children}</div>
       </div>
    );
 };

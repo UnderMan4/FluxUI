@@ -93,7 +93,7 @@ export type Torrent = {
    size: number;
    state: TorrentState;
    super_seeding: boolean;
-   tags: string[];
+   tags: string;
    time_active: number;
    total_size: number;
    tracker: string;

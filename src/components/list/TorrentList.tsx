@@ -1,3 +1,4 @@
+import { Card } from "@/components/common";
 import { TorrentListElement } from "@/components/list/TorrentListElement";
 import { useDataStore } from "@/stores/dataStore";
 import { FC } from "react";
@@ -10,11 +11,9 @@ export type TorrentListProps = {
 export const TorrentList: FC<TorrentListProps> = ({ className }) => {
    const { torrents } = useDataStore();
    return (
-      <div
-         className={twMerge("width-full flex flex-col bg-white p-4", className)}
-      >
+      <div className={twMerge("width-full flex flex-col gap-2", className)}>
          {torrents.map((torrent) => (
-            <TorrentListElement torrent={torrent} />
+            <TorrentListElement torrent={torrent} key={torrent.infohash_v1} />
          ))}
       </div>
    );
