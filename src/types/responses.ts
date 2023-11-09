@@ -106,7 +106,7 @@ export type Torrent = {
 
 export type TorrentState =
    | "error"
-   | "missingFi1es"
+   | "missingFiles"
    | "uploading"
    | "pausedUP"
    | "queuedUP"

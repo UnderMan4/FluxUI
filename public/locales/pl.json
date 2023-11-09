@@ -1,10 +1,18 @@
 {
-    "screens": {
-        "login": {
-            "login": "Zaloguj sie",
-            "password": "Hasło",
-            "username": "Nazwa użytkownika",
-            "header": "Logowanie"
-        }
-    }
+   "screens": {
+      "login": {
+         "login": "Zaloguj sie",
+         "password": "Hasło",
+         "username": "Nazwa użytkownika",
+         "header": "Logowanie"
+      }
+   },
+   "common": {
+      "units": {
+         "days": "d",
+         "hours": "g",
+         "minutes": "m",
+         "seconds": "s"
+      }
+   }
 }

@@ -13,5 +13,13 @@
             "fieldNotEmpty": "This field must not be empty"
          }
       }
+   },
+   "common": {
+      "units": {
+         "days": "d",
+         "hours": "h",
+         "minutes": "m",
+         "seconds": "s"
+      }
    }
 }

@@ -11,15 +11,22 @@ export type TagProps = {
 };
 
 const colors = [
-   Color("#dc2626"),
-   Color("#ea580c"),
-   Color("#ca8a04"),
-   Color("#16a34a"),
-   Color("#0d9488"),
-   Color("#0284c7"),
-   Color("#4f46e5"),
-   Color("#9333ea"),
-   Color("#db2777"),
+   Color("#f44336"),
+   Color("#f34881"),
+   Color("#9c27b0"),
+   Color("#673ab7"),
+   Color("#3f51b5"),
+   Color("#2196f3"),
+   Color("#03a9f4"),
+   Color("#00bcd4"),
+   Color("#009688"),
+   Color("#4caf50"),
+   Color("#8bc34a"),
+   Color("#cddc39"),
+   Color("#ffeb3b"),
+   Color("#ffc107"),
+   Color("#ff9800"),
+   Color("#ff5722"),
 ];
 
 export const Tag: FC<TagProps> = ({ className, children, onClick }) => {
@@ -30,7 +37,7 @@ export const Tag: FC<TagProps> = ({ className, children, onClick }) => {
    return (
       <button
          className={cls(
-            "flex h-6 items-center justify-center rounded-lg border-2 px-2 text-sm",
+            "flex h-5 items-center justify-center rounded-lg border-2 px-1 text-sm",
             {
                "cursor-pointer": !!onClick,
                "cursor-default": !onClick,
@@ -39,7 +46,7 @@ export const Tag: FC<TagProps> = ({ className, children, onClick }) => {
          )}
          style={{
             backgroundColor: color?.hex(),
-            borderColor: color?.darken(0.1).hex(),
+            borderColor: color?.darken(0.2).hex(),
             color: getTextColor(color ?? white).hex(),
          }}
          onClick={onClick}

@@ -1,6 +1,6 @@
 import { usePeriodicUpdate } from "@/hooks/usePeriodicUpdate";
 import { MainLayout } from "@/layouts/MainLayout";
-import { List, Login } from "@/router";
+import { List, Login, TorrentDetails } from "@/router";
 import { AuthService } from "@/services";
 import { useDataStore } from "@/stores/dataStore";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -49,6 +49,10 @@ const App = () => {
             {
                path: "/",
                element: <List />,
+            },
+            {
+               path: "/{id}",
+               element: <TorrentDetails />,
             },
          ],
       },
