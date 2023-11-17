@@ -14,7 +14,12 @@ export const TorrentIconInfo: FC<TorrentIconInfoProps> = ({
    icon,
 }) => {
    return (
-      <div className={cls("flex w-40 items-center gap-2", className)}>
+      <div
+         className={cls(
+            "flex min-w-[8rem] items-center gap-2 text-sm ",
+            className
+         )}
+      >
          <Icon icon={icon} height={22} />
          <span>{children}</span>
       </div>

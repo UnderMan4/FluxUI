@@ -15,9 +15,9 @@ export const ProgressBar: FC<ProgressBarProps> = ({
    progressClassName,
 }) => {
    return (
-      <div className={cls("h-2 w-52", className)}>
+      <div className={cls("h-2 w-52 overflow-hidden bg-white", className)}>
          <div
-            className={cls("h-full bg-green-200", progressClassName)}
+            className={cls("h-full bg-green-500", progressClassName)}
             style={{ width: `${(value / max) * 100}%` }}
          />
       </div>

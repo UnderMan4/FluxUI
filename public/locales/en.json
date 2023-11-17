@@ -5,12 +5,27 @@
          "password": "Password",
          "login": "Login",
          "header": "Login"
+      },
+      "list": {
+         "status": {
+            "missing-files": "Missing files",
+            "error": "Error",
+            "finished": "Finished",
+            "stalled": "Stalled",
+            "seeding": "Seeding",
+            "queued": "Queued",
+            "paused": "Paused",
+            "checking": "Checking files",
+            "allocating": "Allocating space",
+            "moving": "Moving",
+            "forced": "Forced"
+         }
       }
    },
    "errors": {
       "validation": {
          "common": {
-            "fieldNotEmpty": "This field must not be empty"
+            "field-not-empty": "This field must not be empty"
          }
       }
    },

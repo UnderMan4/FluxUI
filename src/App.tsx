@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import axios from "axios";
 import { useEffect } from "react";
+import { ContextMenu } from "./components/common/ContextMenu/ContextMenu";
 import {
    Navigate,
    RouterProvider,
@@ -64,6 +65,7 @@ const App = () => {
 
    return (
       <QueryClientProvider client={queryClient}>
+         <ContextMenu />
          <RouterProvider router={router} />
          <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>

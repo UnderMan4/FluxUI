@@ -1,4 +1,4 @@
-import { TorrentListElement } from "@/components/list/TorrentListElement";
+import { TorrentListElement } from "@/components/list";
 import { useDataStore } from "@/stores/dataStore";
 import { FC } from "react";
 import { twMerge } from "tailwind-merge";
@@ -9,8 +9,9 @@ export type TorrentListProps = {
 
 export const TorrentList: FC<TorrentListProps> = ({ className }) => {
    const { torrents } = useDataStore();
+
    return (
-      <div className={twMerge("width-full flex  flex-col gap-4", className)}>
+      <div className={twMerge("flex w-full flex-col gap-2", className)}>
          {torrents.map((torrent) => (
             <TorrentListElement torrent={torrent} key={torrent.infohash_v1} />
          ))}

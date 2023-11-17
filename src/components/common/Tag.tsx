@@ -2,7 +2,6 @@ import { FC } from "react";
 import { cls } from "@/utils/styles";
 import { hashCode } from "@/utils/hash";
 import Color from "color";
-import { getTextColor, white } from "@/utils/colors";
 
 export type TagProps = {
    className?: string;
@@ -10,23 +9,67 @@ export type TagProps = {
    onClick?: () => void;
 };
 
-const colors = [
-   Color("#f44336"),
-   Color("#f34881"),
-   Color("#9c27b0"),
-   Color("#673ab7"),
-   Color("#3f51b5"),
-   Color("#2196f3"),
-   Color("#03a9f4"),
-   Color("#00bcd4"),
-   Color("#009688"),
-   Color("#4caf50"),
-   Color("#8bc34a"),
-   Color("#cddc39"),
-   Color("#ffeb3b"),
-   Color("#ffc107"),
-   Color("#ff9800"),
-   Color("#ff5722"),
+type TagColors = {
+   bg: Color;
+   fg: Color;
+};
+const colors: TagColors[] = [
+   {
+      bg: Color("#f44336").lighten(0.6),
+      fg: Color("#f44336"),
+   },
+   {
+      bg: Color("#f34881").lighten(0.5),
+      fg: Color("#f34881"),
+   },
+   {
+      bg: Color("#9c27b0").lighten(0.99),
+      fg: Color("#9c27b0"),
+   },
+   {
+      bg: Color("#673ab7").lighten(0.7),
+      fg: Color("#673ab7"),
+   },
+   {
+      bg: Color("#3f51b5").lighten(0.7),
+      fg: Color("#3f51b5"),
+   },
+   {
+      bg: Color("#2196f3").lighten(0.7),
+      fg: Color("#2196f3"),
+   },
+   {
+      bg: Color("#03a9f4").lighten(0.8),
+      fg: Color("#03a9f4"),
+   },
+   {
+      bg: Color("#00bcd4").lighten(0.99),
+      fg: Color("#05a7bd"),
+   },
+   {
+      bg: Color("#009688").lighten(0.5),
+      fg: Color("#009688"),
+   },
+   {
+      bg: Color("#4caf50").lighten(0.8),
+      fg: Color("#4caf50"),
+   },
+   {
+      bg: Color("#8bc34a").lighten(0.7),
+      fg: Color("#8bc34a"),
+   },
+   {
+      bg: Color("#ffc107").lighten(0.8),
+      fg: Color("#f3b90b"),
+   },
+   {
+      bg: Color("#ff9800").lighten(0.8),
+      fg: Color("#ff9800"),
+   },
+   {
+      bg: Color("#ff5722").lighten(0.6),
+      fg: Color("#ff5722"),
+   },
 ];
 
 export const Tag: FC<TagProps> = ({ className, children, onClick }) => {
@@ -37,7 +80,7 @@ export const Tag: FC<TagProps> = ({ className, children, onClick }) => {
    return (
       <button
          className={cls(
-            "flex h-5 items-center justify-center rounded-lg border-2 px-1 text-sm",
+            "flex items-center justify-center rounded-3xl border-2 px-2 text-sm/4 font-bold",
             {
                "cursor-pointer": !!onClick,
                "cursor-default": !onClick,
@@ -45,9 +88,9 @@ export const Tag: FC<TagProps> = ({ className, children, onClick }) => {
             className
          )}
          style={{
-            backgroundColor: color?.hex(),
-            borderColor: color?.darken(0.2).hex(),
-            color: getTextColor(color ?? white).hex(),
+            backgroundColor: color?.bg.hex(),
+            borderColor: color?.fg.hex(),
+            color: color?.fg.hex(),
          }}
          onClick={onClick}
       >

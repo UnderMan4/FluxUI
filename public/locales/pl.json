@@ -5,6 +5,21 @@
          "password": "Hasło",
          "username": "Nazwa użytkownika",
          "header": "Logowanie"
+      },
+      "list": {
+         "status": {
+            "allocating": "Przydzielanie miejsca",
+            "checking": "Sprawdzanie plików",
+            "error": "Błąd",
+            "finished": "Ukończono",
+            "missing-files": "Brakujące pliki",
+            "moving": "Przenoszenie",
+            "paused": "Wstrzymano",
+            "queued": "W kolejce",
+            "seeding": "Seedowanie",
+            "stalled": "Oczekujący",
+            "forced": "Wymuszono"
+         }
       }
    },
    "common": {
@@ -13,6 +28,13 @@
          "hours": "g",
          "minutes": "m",
          "seconds": "s"
+      }
+   },
+   "errors": {
+      "validation": {
+         "common": {
+            "field-not-empty": "To pole nie może być puste"
+         }
       }
    }
 }
