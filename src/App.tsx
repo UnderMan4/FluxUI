@@ -1,8 +1,6 @@
-import { usePeriodicUpdate } from "@/hooks/usePeriodicUpdate";
 import { MainLayout } from "@/layouts/MainLayout";
 import { List, Login, TorrentDetails } from "@/router";
 import { AuthService } from "@/services";
-import { useDataStore } from "@/stores/dataStore";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import axios from "axios";
@@ -13,9 +11,11 @@ import {
    RouterProvider,
    createBrowserRouter,
 } from "react-router-dom";
+import { useAuthStore } from "@/stores/authStore";
+import { startPeriodicUpdate, stopPeriodicUpdate } from "@/signals/appData";
 
 const App = () => {
-   const { logIn, logOut, isLoggedIn } = useDataStore();
+   const { logIn, logOut, isLoggedIn } = useAuthStore();
 
    const DEV = import.meta.env.DEV;
 
@@ -41,7 +41,14 @@ const App = () => {
       checkLogin();
    }, []);
 
-   usePeriodicUpdate();
+   // usePeriodicUpdate();
+
+   useEffect(() => {
+      if (!isLoggedIn) return stopPeriodicUpdate;
+      startPeriodicUpdate();
+
+      return stopPeriodicUpdate;
+   }, [isLoggedIn]);
 
    const router = createBrowserRouter([
       {
@@ -67,7 +74,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
          <ContextMenu />
          <RouterProvider router={router} />
-         <ReactQueryDevtools initialIsOpen={false} />
+         {DEV && <ReactQueryDevtools initialIsOpen={false} />}
       </QueryClientProvider>
    );
 };

@@ -1,12 +1,5 @@
+import { ContextMenuItem } from "@/hooks";
 import { create } from "zustand";
-
-export type ContextMenuItem =
-   | "separator"
-   | {
-        label: string;
-        onClick: () => void;
-        icon?: string;
-     };
 
 export type ContextMenuStoreState = {
    isOpen: boolean;
@@ -17,7 +10,7 @@ export type ContextMenuStoreState = {
    close: () => void;
 };
 
-export const useContextMenuStore = create<ContextMenuStoreState>((set) => ({
+export const useContextMenuStore = create<ContextMenuStoreState>()((set) => ({
    isOpen: false,
    x: 0,
    y: 0,

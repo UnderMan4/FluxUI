@@ -47,7 +47,7 @@ const colors: TagColors[] = [
       fg: Color("#05a7bd"),
    },
    {
-      bg: Color("#009688").lighten(0.5),
+      bg: Color("#4bc9bc").lighten(0.4),
       fg: Color("#009688"),
    },
    {

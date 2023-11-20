@@ -11,6 +11,7 @@ export type MainData = {
    torrents_removed?: string[];
    categories_removed?: string[];
    tags_removed?: string[];
+   trackers_removed?: string[];
 };
 
 export type Torrents = { [key: string]: Torrent };

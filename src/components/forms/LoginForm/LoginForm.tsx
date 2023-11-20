@@ -2,13 +2,13 @@ import { Button } from "@/components/common";
 import { Form, TextInput } from "@/components/form";
 import { loginSchema } from "@/components/forms/LoginForm/schemas";
 import { AuthService } from "@/services";
-import { useDataStore } from "@/stores/dataStore";
+import { useAuthStore } from "@/stores/authStore";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
 export const LoginForm: FC = () => {
    const { t } = useTranslation();
-   const { logIn } = useDataStore();
+   const { logIn } = useAuthStore();
    return (
       <Form
          className="flex w-72 flex-col gap-4"

@@ -25,14 +25,17 @@ export const TorrentListElement: FC<TorrentListElementProps> = ({
       {
          label: "Pause",
          onClick: () => {},
+         icon: "ph:pause-bold",
       },
       {
          label: "Resume",
          onClick: () => {},
+         icon: "ph:play-bold",
       },
       {
          label: "Delete",
          onClick: () => {},
+         icon: "ph:trash-bold",
       },
       "separator",
       {
