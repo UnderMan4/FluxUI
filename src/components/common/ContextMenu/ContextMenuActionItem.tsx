@@ -2,8 +2,11 @@ import { useContextMenuStore } from "@/stores/contextMenuStore";
 import { cls } from "@/utils/styles";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { FC, useCallback } from "react";
+import { motion } from "framer-motion";
+import Color from "color";
 
 export type ContextMenuActionItemProps = {
+   id: string;
    label: string;
    className?: string;
    icon?: string;
@@ -12,8 +15,10 @@ export type ContextMenuActionItemProps = {
    classNameText?: string;
    classNameIcon?: string;
 };
+const bgColor = Color("rgb(241 245 249)");
 
 export const ContextMenuActionItem: FC<ContextMenuActionItemProps> = ({
+   id,
    className,
    label,
    icon,
@@ -29,15 +34,22 @@ export const ContextMenuActionItem: FC<ContextMenuActionItemProps> = ({
       if (closeOnClick) close();
    }, [closeOnClick, onClick]);
    return (
-      <button
+      <motion.button
          className={cls(
-            "flex h-9 flex-row items-center rounded-md px-3 hover:bg-slate-100",
+            "flex h-9 flex-row items-center rounded-md px-3 ",
             {
                "pl-0": reserveIconSpace,
             },
             className
          )}
+         initial={{ backgroundColor: bgColor.alpha(0).hexa() }}
+         whileHover={{
+            backgroundColor: bgColor.hex(),
+         }}
+         whileTap={{ backgroundColor: bgColor.darken(0.05).hex() }}
+         transition={{ duration: 0.1 }}
          onClick={handleClick}
+         key={`${id}-button`}
       >
          {reserveIconSpace && (
             <div className="flex aspect-square h-full items-center pl-1">
@@ -47,6 +59,6 @@ export const ContextMenuActionItem: FC<ContextMenuActionItemProps> = ({
             </div>
          )}
          <span className={classNameText}>{label}</span>
-      </button>
+      </motion.button>
    );
 };

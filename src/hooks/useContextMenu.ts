@@ -4,6 +4,7 @@ import { useEffect } from "react";
 export type ContextMenuItem =
    | "separator"
    | {
+        id: string;
         label: string;
         onClick: () => void;
         icon?: string;

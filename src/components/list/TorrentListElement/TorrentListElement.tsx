@@ -25,26 +25,31 @@ export const TorrentListElement: FC<TorrentListElementProps> = ({
       mainRef,
       [
          {
+            id: "pause",
             label: "Pause",
             onClick: () => {},
             icon: "ph:pause-bold",
          },
          {
+            id: "resume",
             label: "Resume",
             onClick: () => {},
             icon: "ph:play-bold",
          },
          {
+            id: "delete",
             label: "Delete",
             onClick: () => {},
             icon: "ph:trash-bold",
          },
          "separator",
          {
+            id: "forceDownload",
             label: "Force Download",
             onClick: () => {},
          },
          {
+            id: "forceUpload",
             label: "Force Upload",
             onClick: () => {},
          },
@@ -54,10 +59,12 @@ export const TorrentListElement: FC<TorrentListElementProps> = ({
 
    useContextMenu(buttonRef, [
       {
+         id: "pause",
          label: "Pause",
          onClick: () => {},
       },
       {
+         id: "resume",
          label: "Resume",
          onClick: () => {},
       },

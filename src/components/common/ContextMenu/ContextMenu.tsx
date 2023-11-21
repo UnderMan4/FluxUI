@@ -26,7 +26,7 @@ export const ContextMenu: FC<ContextMenuProps> = ({ id }) => {
    const [style, setStyle] = useState<ContextMenuStyle>({});
 
    useOnClickOutside(ref, (e) => {
-      if (e.button !== 2 && store[id]?.isOpen) {
+      if ((e.button !== 2 && store[id]?.isOpen) || e.shiftKey) {
          close();
       }
    });
@@ -88,7 +88,7 @@ export const ContextMenu: FC<ContextMenuProps> = ({ id }) => {
                      }
                      return (
                         <ContextMenuActionItem
-                           key={i} //NOSONAR
+                           key={item.id}
                            {...item}
                            reserveIconSpace={reserveIconSpace}
                         />
