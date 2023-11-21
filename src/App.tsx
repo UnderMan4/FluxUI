@@ -41,8 +41,6 @@ const App = () => {
       checkLogin();
    }, []);
 
-   // usePeriodicUpdate();
-
    useEffect(() => {
       if (!isLoggedIn) return stopPeriodicUpdate;
       startPeriodicUpdate();
@@ -72,7 +70,8 @@ const App = () => {
 
    return (
       <QueryClientProvider client={queryClient}>
-         <ContextMenu />
+         <ContextMenu id="A" />
+         <ContextMenu id="B" />
          <RouterProvider router={router} />
          {DEV && <ReactQueryDevtools initialIsOpen={false} />}
       </QueryClientProvider>

@@ -13,7 +13,8 @@ export type ContextMenuItem =
 
 export const useContextMenu = (
    parentRef: React.RefObject<HTMLElement>,
-   items: ContextMenuItem[] = []
+   items: ContextMenuItem[] = [],
+   closeOnClick: boolean = true
 ) => {
    const { open } = useContextMenuStore();
    useEffect(() => {
@@ -22,9 +23,7 @@ export const useContextMenu = (
             return;
          }
          e.preventDefault();
-         console.time("contextMenu");
-         open(e.pageX, e.pageY, items);
-         console.timeEnd("contextMenu");
+         open(e.pageX, e.pageY, items, closeOnClick);
       };
 
       parentRef.current?.addEventListener("contextmenu", handleContextMenu);

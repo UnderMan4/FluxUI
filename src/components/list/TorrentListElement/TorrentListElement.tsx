@@ -21,32 +21,36 @@ export const TorrentListElement: FC<TorrentListElementProps> = ({
    const mainRef = useRef<HTMLDivElement>(null);
    const buttonRef = useRef<HTMLButtonElement>(null);
 
-   useContextMenu(mainRef, [
-      {
-         label: "Pause",
-         onClick: () => {},
-         icon: "ph:pause-bold",
-      },
-      {
-         label: "Resume",
-         onClick: () => {},
-         icon: "ph:play-bold",
-      },
-      {
-         label: "Delete",
-         onClick: () => {},
-         icon: "ph:trash-bold",
-      },
-      "separator",
-      {
-         label: "Force Download",
-         onClick: () => {},
-      },
-      {
-         label: "Force Upload",
-         onClick: () => {},
-      },
-   ]);
+   useContextMenu(
+      mainRef,
+      [
+         {
+            label: "Pause",
+            onClick: () => {},
+            icon: "ph:pause-bold",
+         },
+         {
+            label: "Resume",
+            onClick: () => {},
+            icon: "ph:play-bold",
+         },
+         {
+            label: "Delete",
+            onClick: () => {},
+            icon: "ph:trash-bold",
+         },
+         "separator",
+         {
+            label: "Force Download",
+            onClick: () => {},
+         },
+         {
+            label: "Force Upload",
+            onClick: () => {},
+         },
+      ],
+      false
+   );
 
    useContextMenu(buttonRef, [
       {

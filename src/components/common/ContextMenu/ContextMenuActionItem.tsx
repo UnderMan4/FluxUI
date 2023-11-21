@@ -1,10 +1,11 @@
+import { useContextMenuStore } from "@/stores/contextMenuStore";
 import { cls } from "@/utils/styles";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { FC } from "react";
+import { FC, useCallback } from "react";
 
 export type ContextMenuActionItemProps = {
-   className?: string;
    label: string;
+   className?: string;
    icon?: string;
    reserveIconSpace?: boolean;
    onClick?: () => void;
@@ -21,6 +22,12 @@ export const ContextMenuActionItem: FC<ContextMenuActionItemProps> = ({
    classNameIcon,
    classNameText,
 }) => {
+   const { close, closeOnClick } = useContextMenuStore();
+
+   const handleClick = useCallback(() => {
+      onClick?.();
+      if (closeOnClick) close();
+   }, [closeOnClick, onClick]);
    return (
       <button
          className={cls(
@@ -30,7 +37,7 @@ export const ContextMenuActionItem: FC<ContextMenuActionItemProps> = ({
             },
             className
          )}
-         onClick={onClick}
+         onClick={handleClick}
       >
          {reserveIconSpace && (
             <div className="flex aspect-square h-full items-center pl-1">

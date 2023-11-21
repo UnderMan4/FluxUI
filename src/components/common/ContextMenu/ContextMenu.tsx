@@ -2,11 +2,11 @@ import { ContextMenuActionItem } from "@/components/common/ContextMenu/ContextMe
 import { ContextMenuSeparator } from "@/components/common/ContextMenu/ContextMenuSeparator";
 import { useContextMenuStore } from "@/stores/contextMenuStore";
 import { AnimatePresence, motion } from "framer-motion";
-import { FC, useLayoutEffect, useRef, useState } from "react";
-import { twMerge } from "tailwind-merge";
+import { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "usehooks-ts";
 
 export type ContextMenuProps = {
+   id: "A" | "B";
    className?: string;
 };
 
@@ -17,71 +17,86 @@ type ContextMenuStyle = {
    bottom?: number;
 };
 
-export const ContextMenu: FC<ContextMenuProps> = ({ className }) => {
-   const { close, isOpen, items, x, y } = useContextMenuStore();
+export const ContextMenu: FC<ContextMenuProps> = ({ id }) => {
+   const store = useContextMenuStore();
+   const { close, items } = store;
+
    const ref = useRef<HTMLDivElement>(null);
 
    const [style, setStyle] = useState<ContextMenuStyle>({});
 
-   useOnClickOutside(ref, close);
+   useOnClickOutside(ref, (e) => {
+      if (e.button !== 2 && store[id]?.isOpen) {
+         close();
+      }
+   });
+
+   useEffect(() => {
+      return () => {
+         console.log("unmount");
+      };
+   }, []);
 
    const reserveIconSpace = items?.some(
       (item) => item != "separator" && item.icon
    );
 
    useLayoutEffect(() => {
-      if (!isOpen || !ref.current?.offsetHeight || !ref.current.offsetHeight)
+      if (
+         !store[id]?.isOpen ||
+         !ref.current?.offsetHeight ||
+         !ref.current.offsetHeight
+      )
          return;
 
-      const rightSpace = document.documentElement.scrollWidth - x;
-      const bottomSpace = document.documentElement.scrollHeight - y;
+      const rightSpace =
+         document.documentElement.scrollWidth - (store[id]?.x || 0);
+      const bottomSpace =
+         document.documentElement.scrollHeight - (store[id]?.y || 0);
       const newStyle: ContextMenuStyle = {};
 
       if (bottomSpace < ref.current.offsetHeight) {
-         newStyle.top = y - ref.current.offsetHeight;
+         newStyle.top = (store[id]?.y || 0) - ref.current.offsetHeight;
       } else {
-         newStyle.top = y;
+         newStyle.top = store[id]?.y || 0;
       }
 
       if (rightSpace < ref.current.offsetWidth) {
-         newStyle.left = x - ref.current.offsetWidth;
+         newStyle.left = (store[id]?.x || 0) - ref.current.offsetWidth;
       } else {
-         newStyle.left = x;
+         newStyle.left = store[id]?.x || 0;
       }
 
       setStyle(newStyle);
-   }, [x, y]);
+   }, [store[id]?.x, store[id]?.y]);
 
    return (
-      <AnimatePresence>
-         {isOpen && items && (
-            <motion.div
-               initial={{ opacity: 0, y: 40 }}
-               animate={{ opacity: 1, y: 0 }}
-               exit={{ opacity: 0, y: 40 }}
-               transition={{ duration: 0.1 }}
-               key={`${x}-${y}`}
-               ref={ref}
-               className={twMerge(
-                  "absolute z-[9999] flex  max-h-[30rem] max-w-xs flex-col gap-1 rounded-xl bg-white p-2 shadow-lg",
-                  className
-               )}
-               style={style}
-            >
-               {items.map((item, i) => {
-                  if (item === "separator") {
-                     return <ContextMenuSeparator key={i} />; //NOSONAR
-                  }
-                  return (
-                     <ContextMenuActionItem
-                        key={i} //NOSONAR
-                        {...item}
-                        reserveIconSpace={reserveIconSpace}
-                     />
-                  );
-               })}
-            </motion.div>
-         )}
-      </AnimatePresence>
+      <motion.div ref={ref} style={style} className={"absolute z-[9999] "}>
+         <AnimatePresence>
+            {store[id]?.isOpen && (
+               <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 40 }}
+                  transition={{ duration: 0.1 }}
+                  key={`${store[id]?.x}-${store[id]?.y}`}
+                  className="flex  max-h-[30rem] max-w-xs flex-col gap-1 rounded-xl bg-white p-2 shadow-lg"
+               >
+                  {items.map((item, i) => {
+                     if (item === "separator") {
+                        return <ContextMenuSeparator key={i} />; //NOSONAR
+                     }
+                     return (
+                        <ContextMenuActionItem
+                           key={i} //NOSONAR
+                           {...item}
+                           reserveIconSpace={reserveIconSpace}
+                        />
+                     );
+                  })}
+               </motion.div>
+            )}
+         </AnimatePresence>
+      </motion.div>
    );
 };
